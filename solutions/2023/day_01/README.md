@@ -60,6 +60,6 @@ versus this number dict
 number_dict = {"one": 'one1one', "two": 'two2two', "three": 'three3three', "four": 'four4four', "five": 'five5five', 
                     "six": 'six6six', "seven": 'seven7seven', "eight": 'eight8eight', "nine": 'nine9nine'} 
 ``` 
-impacted the answer, b/c with the first one if there is a string like twone, then that would become tw1 bc 1 is the first key in the dictionary and the two is lost which changes the answer. However, with the second one, that would become twone1one, which preseves the two in the string so that it is also replaced correctly and the right answer is reached. 
+impacted the answer, b/c with the first one if there is a string like twone, then that would become tw1 bc 1 is the first key in the dictionary and the two is lost which changes the answer. However, with the second one, that would become twone1one, which preseves the two in the string. This results in the final string becoming two2twone1one. This dictionary allows the written numbers to be properly transformed without losing any numbers. 
 
 
