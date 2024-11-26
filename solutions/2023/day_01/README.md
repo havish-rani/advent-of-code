@@ -48,14 +48,18 @@ print(pattern.findall('Order 1234, Order 5678'))  # Output: ['1234', '5678']
 ```
 ## Part 2
 Be careful when replacing things in a string.  
-Using this number_dict 
+Using this number_dict  
+```python
 number_dict = {
         "one": '1', "two": '2', "three": '3', "four": '4', 
         "five": '5', "six": '6', "seven": '7', "eight": '8', "nine": '9'
 }  
+```
 versus this number dict  
+```python
 number_dict = {"one": 'one1one', "two": 'two2two', "three": 'three3three', "four": 'four4four', "five": 'five5five', 
-                    "six": 'six6six', "seven": 'seven7seven', "eight": 'eight8eight', "nine": 'nine9nine'}  
+                    "six": 'six6six', "seven": 'seven7seven', "eight": 'eight8eight', "nine": 'nine9nine'} 
+``` 
 impacted the answer, b/c with the first one if there is a string like twone, then that would become tw1 bc 1 is the first key in the dictionary and the two is lost which changes the answer. However, with the second one, that would become twone1one, which preseves the two in the string so that it is also replaced correctly and the right answer is reached. 
 
 
