@@ -15,20 +15,20 @@ class Solution(StrSplitSolution):
         sum = 0
         for index, game_info in enumerate(self.input,start=1): 
             flag = True
-            # index, game_info = line.split(":")
-            print("Index: ", index) 
+            # print("Index: ", index) 
             _, game_info = game_info.split(":")
-            print("Game Info: ", game_info)
+            # print("Game Info: ", game_info)
             color_dict = {"red": 12, "green": 13, "blue": 14}
             color_list = ['red', 'blue', 'green']
             for color in color_list: 
                 color_nums = re.findall(rf'\d+ {color}',game_info)
-                print("color_nums: ", color_nums)
+                # print("color_nums: ", color_nums)
                 nums = re.findall(r'\d+',str(color_nums))
-                print("nums: ", nums)
+                # print("nums: ", nums)
                 for num in nums: 
                     if int(num) > color_dict[color]: 
                         flag = False
+            # color_nums = re.findall(r'(\d+) (\w+)', game_info)
             # for num, color in color_nums: 
             #     print("sum: ", sum)
             #     if int(num) > color_dict[color]: 
@@ -40,9 +40,34 @@ class Solution(StrSplitSolution):
             # if count == 5: break
         return sum
 
-    # @answer(1234)
+    @answer(71585)
     def part_2(self) -> int:
-        pass
+        sum = 0
+        count = 0
+        for index, game_info in enumerate(self.input,start=1): 
+            flag = True
+            # index, game_info = line.split(":")
+            # print("Index: ", index) 
+            _, game_info = game_info.split(":")
+            # print("Game Info: ", game_info)
+            color_list = ['red', 'blue', 'green']
+            min_cubes = []
+            for color in color_list: 
+                color_nums = re.findall(rf'\d+ {color}',game_info)
+                # print("color_nums: ", color_nums)
+                nums = re.findall(r'\d+',str(color_nums))
+                # print("nums: ", nums)
+                min_cubes.append(max(map(int, nums)))
+            # print("min_cubes: ", min_cubes)
+            mult = 1
+            for m in min_cubes: 
+                mult *= m
+            # print("mult: ", mult)
+            # count += 1
+            # if count == 5: break
+            sum += mult
+        return sum
+        
 
     # @answer((1234, 4567))
     # def solve(self) -> tuple[int, int]:
