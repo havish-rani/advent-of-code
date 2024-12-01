@@ -9,8 +9,7 @@ class Solution(StrSplitSolution):
     _year = 2024
     _day = 1
 
-    @answer(936063)
-    def part_1(self) -> int:
+    def left_right(self) -> tuple[list[int],list[int]]: 
         count = 0
         left = []
         right = []
@@ -25,23 +24,27 @@ class Solution(StrSplitSolution):
                     left.append(int(line_split[i]))
                 elif i%2 == 1: 
                     right.append(int(line_split[i]))
-            # count += 1 
-            # if count == 5: break
-        print("left: ", left)
-        print("right: ", right)
         left.sort()
         right.sort()
-        print("left sort: ", left)
-        print("right sort: ", right)
+        return (left,right)
+
+    @answer(936063)
+    def part_1(self) -> int:
+        left,right = self.left_right()
         diff = 0
         for i in range(len(left)): 
             diff += abs(left[i] - right[i])
         return diff
 
 
-    # @answer(1234)
+    @answer(23150395)
     def part_2(self) -> int:
-        pass
+        left,right = self.left_right()
+        similarity_score = 0
+        for i in range(len(left)): 
+            freq = right.count(left[i])
+            similarity_score += (left[i] * freq)
+        return similarity_score
 
     # @answer((1234, 4567))
     # def solve(self) -> tuple[int, int]:
