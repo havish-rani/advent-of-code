@@ -8,8 +8,16 @@ from ...base import StrSplitSolution, answer
 class Solution(StrSplitSolution):
     _year = 2024
     _day = 2
+    unsafe_reports = []
+    part_1_ans = 0
 
-    # @answer(1234)
+    def increasing(self,report): 
+        return all((report[i] > report[i+1]) & (abs(report[i] - report[i+1]) <= 3) for i in range(len(report)-1))
+    
+    def decreasing(self,report): 
+        return all((report[i] < report[i+1]) & (abs(report[i] - report[i+1]) <= 3) for i in range(len(report)-1))
+
+    @answer(463)
     def part_1(self) -> int:
         safe_count = 0 
         for line in self.input: 
@@ -17,27 +25,34 @@ class Solution(StrSplitSolution):
             safe_dec = False
             safe_inc = False
             report = list(map(int,report))
-            if all((report[i] > report[i+1]) & (abs(report[i] - report[i+1]) <= 3) for i in range(len(report)-1)):
+            if self.increasing(report):
                 safe_dec = True
-                print("increasing list")
-            if all((report[i] < report[i+1]) & (abs(report[i] - report[i+1]) <= 3) for i in range(len(report)-1)):
+                # print("increasing list")
+            elif self.decreasing(report):
                 safe_inc = True
-                print("decreasing list")
-
-            # for i in range(len(report)-1): 
-            #     if (abs(report[i] - report[i+1]) > 3): 
-            #         safe = False
-            #     # if (report[i])
-            #     # print(i)
+                # print("decreasing list")
+            else: 
+                self.unsafe_reports.append(report)
             if safe_dec or safe_inc: safe_count += 1
+        self.part_1_ans = safe_count
         return safe_count
-            # print(report)
-            
-        
-
-    # @answer(1234)
+    
+    @answer(514)
     def part_2(self) -> int:
-        pass
+        dampened_count = 0
+        for report in self.unsafe_reports: 
+            dampened = False
+            for i in range(len(report)): 
+                copy = report.copy()
+                copy.pop(i)
+                if (self.increasing(copy) or self.decreasing(copy)): 
+                    dampened = True
+                    # self.debug(copy)
+            # print(report)
+            if dampened: dampened_count += 1
+        return dampened_count + self.part_1_ans
+
+
 
     # @answer((1234, 4567))
     # def solve(self) -> tuple[int, int]:
